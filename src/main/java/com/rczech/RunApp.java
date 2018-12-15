@@ -20,20 +20,30 @@ public class RunApp {
 
             switch (action) {
                 case "1":
-                    System.out.println("one");
+                    System.out.println("You chose to show one: ");
+
+
                     break;
                 case "2":
-                    System.out.println("twoo");
+                    System.out.println("You chose to delete: ");
+
                     break;
                 case "3":
-                    System.out.println("three");
+                    System.out.println("You chose to update: ");
+
+
+
                     break;
                 case "4":
-                    System.out.println("four");
+                    System.out.println("You chose to: add ");
+
                     break;
                 case "5":
-                    System.out.println("five");
+                    System.out.println("You chose to show all: ");
+
                     break;
+                default:
+                    System.out.println("Unknown querry");
             }
 
         } catch (

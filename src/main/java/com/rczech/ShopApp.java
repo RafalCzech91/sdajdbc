@@ -10,6 +10,7 @@ public class ShopApp {
     static final String USER = "rafael";
     static final String PASS = "zaq12wsx";
 
+
     public static void main(String[] args) {
 
                //register mysql driver
@@ -77,7 +78,17 @@ public class ShopApp {
 
     }
 
-    private static void updateProducts(PreparedStatement preparedStatement) {
+    private static void displayProduct(PreparedStatement preparedStatement) {
+
+    }
+
+    private static void deleteProducts(PreparedStatement preparedStatement) {
+
+    }
+
+
+
+    public static void updateProducts(PreparedStatement preparedStatement) {
         try {
             preparedStatement.setString(1, "bla bla bla");
             preparedStatement.setInt(2, 1);
@@ -134,5 +145,4 @@ public class ShopApp {
             }
         }
     }
-
 }
