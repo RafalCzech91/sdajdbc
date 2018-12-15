@@ -10,6 +10,9 @@ public class ShopApp {
     static final String USER = "rafael";
     static final String PASS = "zaq12wsx";
 
+    Connection connection = null;
+    Statement statement = null;
+
 
     public static void main(String[] args) {
 
@@ -25,7 +28,6 @@ public class ShopApp {
 
         //establish connection
         Connection connection = null;
-
         try {
             connection =
                     DriverManager.getConnection(DB_URL, USER, PASS);
@@ -78,14 +80,19 @@ public class ShopApp {
 
     }
 
+
+
     public void displayProduct(PreparedStatement preparedStatement) {
+
 
 
 
 
     }
 
-    private static void deleteProducts(PreparedStatement preparedStatement) {
+
+
+    public   void deleteProducts(PreparedStatement preparedStatement) {
 
     }
 
@@ -104,7 +111,7 @@ public class ShopApp {
         }
     }
 
-    private static void insertProduct(Statement statement) {
+    public static void  insertProduct(Statement statement) {
         try {
             int inserted = statement.executeUpdate(
                     "INSERT INTO PRODUCTS VALUES " +
@@ -117,7 +124,7 @@ public class ShopApp {
         }
     }
 
-    private static void findAllProducts(Statement statement) {
+    public static void findAllProducts(Statement statement) {
         ResultSet resultSet = null;
 
         try {

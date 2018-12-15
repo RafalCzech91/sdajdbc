@@ -9,16 +9,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static com.rczech.ShopApp.DB_URL;
-import static com.rczech.ShopApp.PASS;
-import static com.rczech.ShopApp.USER;
+import static com.rczech.ShopApp.*;
 
 
 public class RunApp {
 
     public static void main(String[] args) {
 
-        ShopApp shopApp = new ShopApp();
+        ShopAppplication shopApp = new ShopAppplication();
 
 //register driver
         try {
@@ -54,7 +52,7 @@ public class RunApp {
         switch (action) {
             case "1":
                 System.out.println("You chose to show one: ");
-                //shopApp.displayProduct();
+//                shopApp.displayProduct(product_id);
 
 
                 break;
@@ -74,6 +72,7 @@ public class RunApp {
             case "5":
                 System.out.println("You chose to show all: ");
 
+                shopApp.findAllProducts(connection);
                 break;
             default:
                 System.out.println("Unknown querry");
