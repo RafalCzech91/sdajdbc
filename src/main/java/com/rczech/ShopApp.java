@@ -78,7 +78,10 @@ public class ShopApp {
 
     }
 
-    private static void displayProduct(PreparedStatement preparedStatement) {
+    public void displayProduct(PreparedStatement preparedStatement) {
+
+
+
 
     }
 
