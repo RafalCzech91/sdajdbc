@@ -2,9 +2,6 @@ package com.rczech;
 
 import com.mysql.jdbc.Driver;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.sql.*;
 
 public class ShopApp {
@@ -15,21 +12,12 @@ public class ShopApp {
 
     public static void main(String[] args) {
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String username = null;
-        try {
-            System.out.print("Please enter user name : ");
-            username = reader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        //register mysql driver
+               //register mysql driver
         try {
             Driver driver = new Driver();
             DriverManager.registerDriver(driver);
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
             // we should not continue
         }
@@ -40,7 +28,8 @@ public class ShopApp {
         try {
             connection =
                     DriverManager.getConnection(DB_URL, USER, PASS);
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
         }
 
@@ -58,7 +47,8 @@ public class ShopApp {
             statement = connection.createStatement();
             insertProduct(statement);
             findAllProducts(statement);
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
         } finally {
             if (preparedStatement != null) {
@@ -80,9 +70,11 @@ public class ShopApp {
         try {
             if (connection != null)
                 connection.close();
-        } catch (SQLException e) {
+        } catch (
+                SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     private static void updateProducts(PreparedStatement preparedStatement) {

@@ -1,0 +1,45 @@
+package com.rczech;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class RunApp {
+
+    public static void main(String[] args) {
+
+        ShopApp shopApp = new ShopApp();
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String action = null;
+        try {
+            System.out.print("Please choose action : " +
+                    "1 - show one" + " 2 - delete" + " 3 - update" + " 4 - add" + " 5 - show all"
+            );
+            action = reader.readLine();
+
+            switch (action) {
+                case "1":
+                    System.out.println("one");
+                    break;
+                case "2":
+                    System.out.println("twoo");
+                    break;
+                case "3":
+                    System.out.println("three");
+                    break;
+                case "4":
+                    System.out.println("four");
+                    break;
+                case "5":
+                    System.out.println("five");
+                    break;
+            }
+
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
