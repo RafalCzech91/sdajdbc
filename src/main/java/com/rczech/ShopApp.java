@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 
-public class App {
+public class ShopApp {
 
     static final String DB_URL = "jdbc:mysql://localhost/product";
     static final String USER = "rafael";
@@ -24,24 +24,22 @@ public class App {
             e.printStackTrace();
         }
 
-        System.out.println(username);
-
 
         //register mysql driver
-
         try {
             Driver driver = new Driver();
             DriverManager.registerDriver(driver);
         } catch (SQLException e) {
             e.printStackTrace();
-            //we should not continue
+            // we should not continue
         }
 
         //establish connection
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            connection =
+                    DriverManager.getConnection(DB_URL, USER, PASS);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,21 +50,24 @@ public class App {
 
         try {
             preparedStatement = connection.prepareStatement(
-                    "update products " + "set description = ? where product_id = ?"
+                    "UPDATE PRODUCTS " +
+                            "SET DESCRIPTION = ? WHERE PRODUCT_ID = ?"
             );
             updateProducts(preparedStatement);
+
             statement = connection.createStatement();
-
             insertProduct(statement);
-            findAllProdcuts(statement);
-            showProducts(statement);
-            deleteProducts(statement);
-
-
-
+            findAllProducts(statement);
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
+            if (preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
             try {
                 if (statement != null)
                     statement.close();
@@ -82,47 +83,26 @@ public class App {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-    }
-
-    private static void deleteProducts(Statement statement) {
-
-//        PreparedStatement preparedStatement=connection.prepareStatement("delete from emp where id=?");
-//        preparedStatement.setInt(1,101);
-//
-//        int i=preparedStatement.executeUpdate();
-//        System.out.println(i+" records deleted");
-
-    }
-
-    private static void showProducts(Statement statement) {
-
-
     }
 
     private static void updateProducts(PreparedStatement preparedStatement) {
-
         try {
-            preparedStatement.setString(1, "blablabla");
+            preparedStatement.setString(1, "bla bla bla");
             preparedStatement.setInt(2, 1);
 
             int updated = preparedStatement.executeUpdate();
 
-            System.out.println(updated + " updated produect.");
+            System.out.println(updated + " updated products.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private static void insertProduct(Statement statement) {
-
         try {
-
             int inserted = statement.executeUpdate(
-                    "insert into products values " +
-                            "(1, 123456, 'first product', 'null')"
+                    "INSERT INTO PRODUCTS VALUES " +
+                            "(1, '123456', 'first product', 'some description')"
             );
 
             System.out.println(inserted + " new products added.");
@@ -131,18 +111,22 @@ public class App {
         }
     }
 
-    private static void findAllProdcuts(Statement statement) {
+    private static void findAllProducts(Statement statement) {
         ResultSet resultSet = null;
 
         try {
-            resultSet = statement.executeQuery("SELECT product_id, name FROM PRODUCTS");
+            resultSet = statement.
+                    executeQuery("SELECT product_id, name, description FROM PRODUCTS");
 
             while (resultSet.next()) {
                 int id = resultSet.getInt("product_id");
                 String name = resultSet.getString("name");
+                String description = resultSet.getString("description");
 
                 System.out.println(
-                        "Product with id: " + id + " and name: " + name + "."
+                        "Product with id: " + id +
+                                " and name: " + name +
+                                " and description: " + description + "."
                 );
             }
 
@@ -151,13 +135,12 @@ public class App {
         } finally {
             if (resultSet != null) {
                 try {
-                    if (resultSet != null)
-                        resultSet.close();
+                    resultSet.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
             }
         }
     }
+
 }
