@@ -1,44 +1,42 @@
 package com.rczech;
 
+import com.rczech.controler.ControllerProduct;
 import com.rczech.domain.Product;
 import com.rczech.domain.Warehouse;
 import com.rczech.hibernate.HibernateSessionRegistry;
-import com.rczech.repository.MySqlRepositoryProduct;
+import com.rczech.repository.mysql.MySqlRepositoryProduct;
 import org.hibernate.Session;
 
 public class ShopApp {
-
     public static void main(String[] args) {
+
+
         Session session = HibernateSessionRegistry
                 .getSessionFactory()
                 .openSession();
 
+        MySqlRepositoryProduct mySqlRepositoryProduct =
+                new MySqlRepositoryProduct(session);
+        ControllerProduct controllerProduct =
+                new ControllerProduct(session, mySqlRepositoryProduct);
+
         // save product -- start
-        String name = "laptop";
-        String catalogNumber = "QW132";
-        Product product = new Product(name, catalogNumber);
+        String name = "11laptop";
+        String catalogNumber = "QW3RTY";
+
+        Integer productId = controllerProduct
+                .create(name, catalogNumber);
+
+        Product product = controllerProduct.find(productId);
+
+        System.out.println(productId);
+
+        //###
 
         try {
             session.getTransaction().begin();
 
-            Integer productId =
-                    new MySqlRepositoryProduct(session)
-                            .save(product);
-
-            //save product -- end
-
-            System.out.println(productId);
-            session.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }
-
-
-        try {
-            session.getTransaction().begin();
-
-            String nameW = "WarehouseOne";
+            String nameW = "11WarehouseOne";
             String street = "Anders";
             String city = "LosAngeles";
             int postalCode = 12345;
@@ -58,5 +56,6 @@ public class ShopApp {
             session.getTransaction().rollback();
         }
         session.close();
+        HibernateSessionRegistry.shutdown();
     }
 }
