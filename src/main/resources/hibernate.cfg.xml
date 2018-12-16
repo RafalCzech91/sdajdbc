@@ -19,6 +19,7 @@
         <mapping class="com.rczech.domain.Warehouse"/>
         <mapping class="com.rczech.domain.Price"/>
         <mapping class="com.rczech.domain.Owner"/>
+        <mapping class="com.rczech.domain.Currency"/>
 
     </session-factory>
 </hibernate-configuration>

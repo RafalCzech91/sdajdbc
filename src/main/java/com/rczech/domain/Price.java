@@ -2,6 +2,8 @@ package com.rczech.domain;
 
 import javax.persistence.*;
 
+
+
 @Entity
 @Table
 public class Price {
@@ -11,9 +13,11 @@ public class Price {
     @Column(name = "price_id")
     private  int id;
     private  float value;
-    private String currency;
 
-    public Price(float value, String currency) {
+    @Enumerated(EnumType.STRING)
+    private Currency currency;
+
+    public Price(float value, Currency currency) {
         this.value = value;
         this.currency = currency;
     }

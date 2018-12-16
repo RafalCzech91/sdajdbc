@@ -1,5 +1,6 @@
 package com.rczech.controler;
 
+import com.rczech.domain.Currency;
 import com.rczech.domain.Price;
 import com.rczech.domain.Product;
 import com.rczech.repository.mysql.MySqlRepositoryProduct;
@@ -17,7 +18,7 @@ public class ControllerProduct {
     }
 
     public Integer create(String name, String catalogNumber) {
-        Product product = new Product(name, catalogNumber, new Price(13, "PLN"));
+        Product product = new Product(name, catalogNumber, new Price(13, Currency.PLN));
         Integer id = null;
 
         try {
