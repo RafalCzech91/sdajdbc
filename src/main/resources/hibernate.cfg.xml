@@ -16,6 +16,8 @@
         <property name="hibernate.id.new_generator_mappings">false</property>
 
         <mapping class="com.rczech.domain.Product"/>
+        <mapping class="com.rczech.domain.Warehouse"/>
+
     </session-factory>
 </hibernate-configuration>
 
