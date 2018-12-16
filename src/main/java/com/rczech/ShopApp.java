@@ -70,6 +70,9 @@ public class ShopApp {
 
         controllerWarehouse.delete(warehouseid);
 
+        List<Warehouse> warehouses = mySqlRepositoryWarehouse.findAll();
+        warehouses.forEach(System.out::println);
+
 
         session.close();
         HibernateSessionRegistry.shutdown();
