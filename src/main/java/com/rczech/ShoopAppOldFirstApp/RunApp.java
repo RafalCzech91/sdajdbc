@@ -1,4 +1,4 @@
-package com.rczech;
+package com.rczech.ShoopAppOldFirstApp;
 
 import com.mysql.jdbc.Driver;
 
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.*;
 
-import static com.rczech.ShopApp.*;
+import static com.rczech.ShoopAppOldFirstApp.ShopApp.*;
 
 
 public class RunApp {

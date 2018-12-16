@@ -1,4 +1,4 @@
-package com.rczech;
+package com.rczech.ShoopAppOldFirstApp;
 
 import com.mysql.jdbc.Driver;
 

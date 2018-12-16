@@ -6,7 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
-public class SessionRegister {
+public class HibernateSessionRegistry {
 
 
     private static StandardServiceRegistry registry;
@@ -26,7 +26,7 @@ public class SessionRegister {
                 sessionFactory = metadata.getSessionFactoryBuilder().build();
             } catch (Exception e) {
                 e.printStackTrace();
-                SessionRegister.shutdown();
+                HibernateSessionRegistry.shutdown();
             }
         }
         return sessionFactory;
