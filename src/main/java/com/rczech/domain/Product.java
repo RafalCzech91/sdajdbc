@@ -25,4 +25,19 @@ public class Product {
 
     private Product() {                 //need to create deafult constructor class 'Product' from calss
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", catalogNumber='" + catalogNumber + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    public void changeDescription(String description) {
+
+        this.description = description;
+    }
 }

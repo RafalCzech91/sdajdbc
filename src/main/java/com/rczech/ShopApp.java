@@ -21,15 +21,18 @@ public class ShopApp {
                 new ControllerProduct(session, mySqlRepositoryProduct);
 
         // save product -- start
-        String name = "11laptop";
+        String name = "plasytation 5";
         String catalogNumber = "QW3RTY";
 
         Integer productId = controllerProduct
                 .create(name, catalogNumber);
 
         Product product = controllerProduct.find(productId);
+        System.out.println(product);
 
-        System.out.println(productId);
+        String description = "fresh and funky";
+        controllerProduct.changeDescription(productId, description);
+
 
         //###
 
