@@ -3,6 +3,7 @@ package com.rczech;
 import com.rczech.domain.Product;
 import com.rczech.domain.Warehouse;
 import com.rczech.hibernate.HibernateSessionRegistry;
+import com.rczech.repository.MySqlRepositoryProduct;
 import org.hibernate.Session;
 
 public class ShopApp {
@@ -12,25 +13,27 @@ public class ShopApp {
                 .getSessionFactory()
                 .openSession();
 
+        // save product -- start
+        String name = "laptop";
+        String catalogNumber = "QW132";
+        Product product = new Product(name, catalogNumber);
+
         try {
             session.getTransaction().begin();
 
-            // save product -- start
-            String name = "laptop";
-            String catalogNumber = "QW132";
-            Product product = new Product(name, catalogNumber);
-
-            Integer productId = (Integer) session.save(product);
+            Integer productId =
+                    new MySqlRepositoryProduct(session)
+                            .save(product);
 
             //save product -- end
 
-            //System.out.println(productId);
-
+            System.out.println(productId);
             session.getTransaction().commit();
         } catch (Exception exception) {
             exception.printStackTrace();
             session.getTransaction().rollback();
         }
+
 
         try {
             session.getTransaction().begin();
