@@ -12,6 +12,7 @@ public class SessionRegister {
     private static StandardServiceRegistry registry;
     private static SessionFactory sessionFactory;
 
+
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {
             try {
@@ -35,6 +36,7 @@ public class SessionRegister {
         if (registry != null) {
             StandardServiceRegistryBuilder.destroy(registry);
         }
+
     }
 }
 
