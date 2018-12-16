@@ -1,5 +1,6 @@
 package com.rczech.controler;
 
+import com.rczech.domain.Price;
 import com.rczech.domain.Product;
 import com.rczech.repository.mysql.MySqlRepositoryProduct;
 import org.hibernate.Session;
@@ -16,7 +17,7 @@ public class ControllerProduct {
     }
 
     public Integer create(String name, String catalogNumber) {
-        Product product = new Product(name, catalogNumber);
+        Product product = new Product(name, catalogNumber, new Price(13, "PLN"));
         Integer id = null;
 
         try {

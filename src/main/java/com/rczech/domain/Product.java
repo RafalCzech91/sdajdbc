@@ -18,9 +18,15 @@ public class Product {
     private String catalogNumber;
     private String description;
 
-    public Product(String name, String catalogNumber) {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "price_id")
+    private Price price;
+
+    public Product(String name, String catalogNumber, Price price) {
         this.name = name;
         this.catalogNumber = catalogNumber;
+        this.price = price;
     }
 
     private Product() {                 //need to create deafult constructor class 'Product' from calss
@@ -31,6 +37,7 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", price='" + price + '\'' +
                 ", catalogNumber='" + catalogNumber + '\'' +
                 ", description='" + description + '\'' +
                 '}';

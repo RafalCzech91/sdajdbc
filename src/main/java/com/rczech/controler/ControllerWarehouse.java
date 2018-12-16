@@ -34,6 +34,7 @@ public class ControllerWarehouse {
     }
 
     public Warehouse find(Integer warehouseid) {
+
         return mySqlRepositoryWarehouse.findById(warehouseid);
     }
 

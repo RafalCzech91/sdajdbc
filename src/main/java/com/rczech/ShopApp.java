@@ -31,6 +31,7 @@ public class ShopApp {
         String name = "plasytation 5";
         String catalogNumber = "QW3RTY";
 
+
         Integer productId = controllerProduct
                 .create(name, catalogNumber);
 
@@ -72,7 +73,6 @@ public class ShopApp {
 
         List<Warehouse> warehouses = mySqlRepositoryWarehouse.findAll();
         warehouses.forEach(System.out::println);
-
 
         session.close();
         HibernateSessionRegistry.shutdown();
