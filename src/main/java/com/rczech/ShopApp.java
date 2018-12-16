@@ -2,9 +2,11 @@ package com.rczech;
 
 import com.rczech.controler.ControllerProduct;
 import com.rczech.controler.ControllerProductFactory;
+import com.rczech.controler.ControllerWarehouse;
 import com.rczech.domain.Product;
 import com.rczech.domain.Warehouse;
 import com.rczech.hibernate.HibernateSessionRegistry;
+import com.rczech.repository.mysql.MySqlRepositoryWarehouse;
 import com.rczech.repository.mysql.MySqlRepositoryProduct;
 import org.hibernate.Session;
 
@@ -17,7 +19,6 @@ public class ShopApp {
                 .openSession();
 
         ControllerProductFactory factory = new ControllerProductFactory(session);
-
 
         MySqlRepositoryProduct mySqlRepositoryProduct =
                 new MySqlRepositoryProduct(session);
@@ -42,28 +43,29 @@ public class ShopApp {
 
         //###
 
-        try {
-            session.getTransaction().begin();
+        String nameW = "11WarehouseOne";
+        String street = "Anders";
+        String city = "LosAngeles";
+        int postalCode = 12345;
+        int buildingNumber = 1;
+        String country = "Poland";
 
-            String nameW = "11WarehouseOne";
-            String street = "Anders";
-            String city = "LosAngeles";
-            int postalCode = 12345;
-            int buildingNumber = 1;
-            String country = "Poland";
+        MySqlRepositoryWarehouse mySqlRepositoryWarehouse =
+                new MySqlRepositoryWarehouse(session);
+        ControllerWarehouse controllerWarehouse =
+                new ControllerWarehouse(session, mySqlRepositoryWarehouse);
 
-            Warehouse warehouse = new Warehouse(nameW, street, city, postalCode, buildingNumber, country);
+        Integer warehouseid = controllerWarehouse.create(nameW, street, city, postalCode, buildingNumber, country);
 
-            Integer warehouseid = (Integer) session.save(warehouse);
+        System.out.println(warehouseid);
 
-            System.out.println(warehouseid);
+        Warehouse warehouse = controllerWarehouse.find(warehouseid);
+        System.out.println(warehouse);
+
+        controllerWarehouse.delete(warehouseid);
 
 
-            session.getTransaction().commit();
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            session.getTransaction().rollback();
-        }
+
         session.close();
         HibernateSessionRegistry.shutdown();
     }

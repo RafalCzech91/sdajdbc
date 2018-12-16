@@ -23,6 +23,7 @@ public class Warehouse {
     private int buildingNumber;
     private String country;
 
+
     public Warehouse(String nameW, String street, String city, int postalCode, int buildingNumber, String country) {
 
         this.nameW = nameW;
@@ -36,4 +37,17 @@ public class Warehouse {
     private Warehouse() {
     }
 
+
+    @Override
+    public String toString() {
+        return "Warehouse{" +
+                "id=" + id +
+                ", nameW='" + nameW + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", postalCode=" + postalCode +
+                ", buildingNumber=" + buildingNumber +
+                ", country='" + country + '\'' +
+                '}';
+    }
 }
