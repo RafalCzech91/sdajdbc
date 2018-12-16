@@ -1,6 +1,10 @@
 package com.rczech.domain;
 
+
+
 import javax.persistence.*;
+
+
 
 @Entity
 @Table(name = "products")
@@ -16,7 +20,16 @@ public class Product {
 
     @Column(name = "catalog_number")
     private String catalogNumber;
-    private String description;
+
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(
+                    name = "longDescription",
+                    column = @Column(name = "long_description")
+            )
+    })
+    private Description description;
+
 
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -37,14 +50,14 @@ public class Product {
         return "Product{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price='" + price + '\'' +
                 ", catalogNumber='" + catalogNumber + '\'' +
-                ", description='" + description + '\'' +
+                ", description=" + description +
+                ", price=" + price +
                 '}';
     }
 
     public void changeDescription(String description) {
-
-        this.description = description;
+        this.description = new Description(
+                description, description);
     }
 }
