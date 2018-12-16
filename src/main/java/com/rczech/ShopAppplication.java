@@ -86,6 +86,7 @@ public class ShopAppplication {
                     e.printStackTrace();
                 }
             }
+
             try {
                 if (statement != null)
                     statement.close();

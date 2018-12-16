@@ -12,6 +12,7 @@ import static com.rczech.ShopApp.*;
 
 public class RunApp {
 
+
     public static void main(String[] args) {
 
         ShopAppplication shopApp = new ShopAppplication();
