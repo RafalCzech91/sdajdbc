@@ -1,6 +1,7 @@
 package com.rczech.controler;
 
 import com.rczech.domain.Owner;
+import com.rczech.domain.Sex;
 import com.rczech.domain.Warehouse;
 import com.rczech.repository.mysql.MySqlRepositoryWarehouse;
 import org.hibernate.Session;
@@ -18,7 +19,7 @@ public class ControllerWarehouse {
 
     public Integer create(String nameW, String street, String city, int postalCode, int buildingNumber, String country) {
 
-        Warehouse warehouse = new Warehouse(nameW, street, city, postalCode, buildingNumber, country, new Owner("tom", "man"));
+        Warehouse warehouse = new Warehouse(nameW, street, city, postalCode, buildingNumber, country, new Owner("tom", Sex.MALE));
         Integer id = null;
 
         try {

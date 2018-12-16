@@ -11,10 +11,12 @@ public class Owner {
     @Column(name = "owner_id")
     private  int id;
 
-    private String name;
-    private String sex;
 
-    public Owner(String name, String sex) {
+    private String name;
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
+
+    public Owner(String name, Sex sex) {
         this.name = name;
         this.sex = sex;
     }

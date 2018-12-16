@@ -1,7 +1,13 @@
 package com.rczech.domain;
 
 public enum Currency {
-    PLN;
+    PLN,
+    US,
+    YUAN,
+    EUR,
+    ;
+
+
 
 
 }
