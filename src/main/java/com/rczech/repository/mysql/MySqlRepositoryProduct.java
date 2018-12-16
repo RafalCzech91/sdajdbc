@@ -25,5 +25,6 @@ public class MySqlRepositoryProduct {
 
     public void delete(Product product) {
         session.delete(product);
+
     }
 }
