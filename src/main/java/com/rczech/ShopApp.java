@@ -33,6 +33,8 @@ public class ShopApp {
         String description = "fresh and funky";
         controllerProduct.changeDescription(productId, description);
 
+        controllerProduct.delete(productId);
+
 
         //###
 
