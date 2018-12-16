@@ -69,7 +69,7 @@ public class RunApp {
                 System.out.println("You chose to: insert ");
                 System.out.println();
 
-                shopApp.insertProducts(connection);
+                shopApp.insertProducts(preparedStatement);
 
 
                 break;

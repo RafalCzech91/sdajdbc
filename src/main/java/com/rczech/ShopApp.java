@@ -82,22 +82,6 @@ public class ShopApp {
 
 
 
-    public void displayProduct(PreparedStatement preparedStatement) {
-
-
-
-
-
-    }
-
-
-
-    public   void deleteProducts(PreparedStatement preparedStatement) {
-
-    }
-
-
-
     public static void updateProducts(PreparedStatement preparedStatement) {
         try {
             preparedStatement.setString(1, "bla bla bla");
