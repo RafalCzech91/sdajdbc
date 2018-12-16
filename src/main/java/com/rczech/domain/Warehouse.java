@@ -23,7 +23,11 @@ public class Warehouse {
     private int buildingNumber;
     private String country;
 
-    public Warehouse(String nameW, String street, String city, int postalCode, int buildingNumber, String country) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "owner_id")
+    private Owner owner;
+
+    public Warehouse(String nameW, String street, String city, int postalCode, int buildingNumber, String country, Owner owner) {
 
         this.nameW = nameW;
         this.street = street;
@@ -31,6 +35,7 @@ public class Warehouse {
         this.postalCode = postalCode;
         this.buildingNumber = buildingNumber;
         this.country = country;
+        this.owner = owner;
     }
 
     private Warehouse() {
@@ -47,6 +52,7 @@ public class Warehouse {
                 ", postalCode=" + postalCode +
                 ", buildingNumber=" + buildingNumber +
                 ", country='" + country + '\'' +
+                ", owner='" + owner + '\'' +
                 '}';
     }
 }
