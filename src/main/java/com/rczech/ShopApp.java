@@ -24,7 +24,7 @@ public class ShopApp {
 
             //save product -- end
 
-            System.out.println(productId);
+            //System.out.println(productId);
 
             session.getTransaction().commit();
         } catch (Exception exception) {
