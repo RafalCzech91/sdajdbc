@@ -1,6 +1,7 @@
 package com.rczech;
 
 import com.rczech.controler.ControllerProduct;
+import com.rczech.controler.ControllerProductFactory;
 import com.rczech.domain.Product;
 import com.rczech.domain.Warehouse;
 import com.rczech.hibernate.HibernateSessionRegistry;
@@ -14,6 +15,9 @@ public class ShopApp {
         Session session = HibernateSessionRegistry
                 .getSessionFactory()
                 .openSession();
+
+        ControllerProductFactory factory = new ControllerProductFactory(session);
+
 
         MySqlRepositoryProduct mySqlRepositoryProduct =
                 new MySqlRepositoryProduct(session);

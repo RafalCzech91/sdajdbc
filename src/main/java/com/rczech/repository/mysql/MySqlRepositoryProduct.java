@@ -7,7 +7,6 @@ public class MySqlRepositoryProduct {
     private Session session;
 
     public MySqlRepositoryProduct(Session session) {
-
         this.session = session;
     }
 
