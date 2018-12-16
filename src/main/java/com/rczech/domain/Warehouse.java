@@ -23,7 +23,6 @@ public class Warehouse {
     private int buildingNumber;
     private String country;
 
-
     public Warehouse(String nameW, String street, String city, int postalCode, int buildingNumber, String country) {
 
         this.nameW = nameW;

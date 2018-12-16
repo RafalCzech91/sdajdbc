@@ -10,6 +10,8 @@ import com.rczech.repository.mysql.MySqlRepositoryWarehouse;
 import com.rczech.repository.mysql.MySqlRepositoryProduct;
 import org.hibernate.Session;
 
+import java.util.List;
+
 public class ShopApp {
     public static void main(String[] args) {
 
@@ -40,15 +42,19 @@ public class ShopApp {
 
         controllerProduct.delete(productId);
 
+        List<Product> products = mySqlRepositoryProduct.findAll();
+        products.forEach(System.out::println);
+
+
 
         //###
 
-        String nameW = "11WarehouseOne";
-        String street = "Anders";
-        String city = "LosAngeles";
-        int postalCode = 12345;
-        int buildingNumber = 1;
-        String country = "Poland";
+        String nameW = "1324568753";
+        String street = "543544325";
+        String city = "235423545";
+        int postalCode = 235454;
+        int buildingNumber = 342;
+        String country = "24525254";
 
         MySqlRepositoryWarehouse mySqlRepositoryWarehouse =
                 new MySqlRepositoryWarehouse(session);
@@ -63,7 +69,6 @@ public class ShopApp {
         System.out.println(warehouse);
 
         controllerWarehouse.delete(warehouseid);
-
 
 
         session.close();
