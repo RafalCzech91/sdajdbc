@@ -29,6 +29,4 @@ public class MongoClientConnectivity {
     public MongoClient getMongoClient() {
         return mongoClient;
     }
-
-   // MongoCollection <Document> books = new MongoCollections(mongoClientConnectivity).getCollection("books");
 }

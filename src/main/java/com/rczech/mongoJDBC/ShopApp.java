@@ -2,16 +2,22 @@ package com.rczech.mongoJDBC;
 
 import com.mongodb.client.MongoCollection;
 import com.rczech.mongoJDBC.domain.BookFactory;
+import com.rczech.mongoJDBC.domain.MembershipCardFactory;
 import org.bson.Document;
 
 import java.util.Arrays;
+import java.util.List;
 
-public class ShopApp {      // Ctrl+Alt+F - reafoctoring
+import static java.time.LocalDateTime.now;
+
+public class ShopApp {
 
     public static void main(String[] args) {
 
         MongoClientConnectivity mongoClientConnectivity = new MongoClientConnectivity();
         mongoClientConnectivity.open();
+
+        MongoCollections collections = new MongoCollections(mongoClientConnectivity);
 
         MongoCollection <Document> books = new MongoCollections(mongoClientConnectivity).getCollection("books");
 
@@ -36,37 +42,88 @@ public class ShopApp {      // Ctrl+Alt+F - reafoctoring
                 )
         ));
 
-
-
-        //Document book = new BookFactory().create(title,author, categories);
-
-       // books.insertOne(book);
-
-        for( Document existingBook : books.find()) {
-            System.out.println(existingBook);
+        for (Document document : books.find()) {
+            System.out.println(document);
         }
 
 
+        for (Document existingBook : books.find()) {
+            System.out.println(existingBook);
+        }
+
+//        collections.createCollection("membershipCard");
 
 
 
-
-//        MongoClient mongoClient = mongoClientConnectivity.getMongoClient();
-//        MongoDatabase library = mongoClient.getDatabase("library");
-//        MongoCollection <Document> books = library.getCollection("books");
+        MongoCollection<Document> membershipCard = collections.getCollection("membershipCard");
 
 
-//        library.createCollection("books");
-//
-//        for (String name : library.listCollectionNames()) {
-//            System.out.println(name);
-//        }
+        MembershipCardFactory aMemebershipCard = new MembershipCardFactory();
 
+        membershipCard.insertMany(Arrays.asList(
+                aMemebershipCard(
+                        "rafal", "podsawwa", Arrays.asList("id1", "id2", "id3", "id4"), "13"),
+                aMemebershipCard(
+                        "adsfadsf", "asdfasdfasd", Arrays.asList("id1", "id3", "id4"), "2")
+                        .append("vip", true),
+                aMemebershipCard(
+                        "asdfasdf", "asdf", Arrays.asList("id2", "id3", "id4"), "3")
+                        .append("payment", 69.13)
+                        .append("vip", true),
+                aMemebershipCard(
+                        "asdfas", "fghjf", Arrays.asList(), "123")
+                        .append("payment", 691.3)
+                        .append("vip", false),
+                aMemebershipCard(
+                        "May", "Parker", Arrays.asList("id1", "id2", "id3"), "2"),
+                aMemebershipCard(
+                        "Ben", "Parker", Arrays.asList("id3", "id4"), "98"),
+                aMemebershipCard(
+                        "Peter", "Parker", Arrays.asList("id1", "id2"), "1322"),
+                aMemebershipCard(
+                        "Mary Jane", "Watson", Arrays.asList("id1", "id3", "id4"), "767"),
+                aMemebershipCard(
+                        "Gwen", "Stacy", Arrays.asList("id1", "id2"), "79")
+                        .append("payment", 1000)
+                        .append("vip", true)
+        ));
 
-
+        for (Document existingBook : membershipCard.find()) {
+            System.out.println(existingBook);
+        }
 
         mongoClientConnectivity.close();
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private static Document aMemebershipCard(String name, String lastName, List<String> books, String number) {
+        return new Document()
+                .append("person", new Document()
+                        .append("firstName", name)
+                        .append("lastName", lastName)
+                )
+                .append("books", books)
+                .append("creationDate", now().toString())
+                .append("number", number);
+    }
+
+
 }
+
+
