@@ -5,7 +5,6 @@ import com.rczech.mongoJDBC.domain.BookFactory;
 import org.bson.Document;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class ShopApp {      // Ctrl+Alt+F - reafoctoring
 
@@ -18,14 +17,30 @@ public class ShopApp {      // Ctrl+Alt+F - reafoctoring
 
         BookFactory bookFactory = new BookFactory();
 
-        String title = "Clean Code";
-        String author = "Robert C.Martin";
-        List<String> categories = Arrays.asList("code quality", "design", "software development");
+        books.insertMany(Arrays.asList(
+                bookFactory.create(
+
+                        "Zbrodnia i Kara",
+                        "Fiodor Dostojewski",
+                        Arrays.asList("code quality", "design")
+                ),
+                bookFactory.create(
+                        "Junit",
+                        "Ktoś mądry",
+                        Arrays.asList("code quality", "sofware development")
+                ),
+                bookFactory.create(
+                        "Kubuś Pucahter",
+                        "Christoper XXX",
+                        Arrays.asList("software develop")
+                )
+        ));
 
 
-        Document book = new BookFactory().create(title,author, categories);
 
-        books.insertOne(book);
+        //Document book = new BookFactory().create(title,author, categories);
+
+       // books.insertOne(book);
 
         for( Document existingBook : books.find()) {
             System.out.println(existingBook);
