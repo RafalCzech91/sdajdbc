@@ -13,15 +13,30 @@ public class Warehouse {
 
     @Column(name = "name")
     private String nameW;
+
+
     private String street;
     private String city;
-
     @Column(name = "postal_code")
     private int postalCode;
-
     @Column(name = "building_number")
     private int buildingNumber;
     private String country;
+
+
+//    @Embedded
+//    @AttributeOverrides({
+//            @AttributeOverride(
+//                    name = "postalCode",
+//                    column = @Column(name = "postal_code")
+//            ),
+//            @AttributeOverride(
+//                    name = "buildingNumber",
+//                    column = @Column(name = "building_number")
+//            )
+//    })
+
+    //private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
