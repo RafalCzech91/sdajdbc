@@ -1,9 +1,13 @@
 package com.rczech.mongoJDBC;
 
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
 import com.rczech.mongoJDBC.domain.BookFactory;
 import com.rczech.mongoJDBC.domain.MembershipCardFactory;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,10 +46,6 @@ public class ShopApp {
                 )
         ));
 
-        for (Document document : books.find()) {
-            System.out.println(document);
-        }
-
 
         for (Document existingBook : books.find()) {
             System.out.println(existingBook);
@@ -54,8 +54,7 @@ public class ShopApp {
 //        collections.createCollection("membershipCard");
 
 
-
-        MongoCollection<Document> membershipCard = collections.getCollection("membershipCard");
+        MongoCollection <Document> membershipCard = collections.getCollection("membershipCard");
 
 
         MembershipCardFactory aMemebershipCard = new MembershipCardFactory();
@@ -92,6 +91,54 @@ public class ShopApp {
             System.out.println(existingBook);
         }
 
+//
+        Bson criteria = Filters.in("vip", true);
+
+
+        FindIterable<Document> documents = membershipCard
+                .find(criteria)
+                .sort(Sorts.orderBy(
+                        Sorts.ascending("author"),
+                        Sorts.ascending("title"))
+                );
+
+        int counter = 0;
+        for (Document document : documents) {
+            System.out.println(document);
+            counter++;
+        }
+        System.out.println(counter);
+
+        System.out.println("----------------------------------");
+        System.out.println("----------------------------------");
+
+
+
+        for (Document document : books.find(criteria)) {
+            System.out.println(document);
+        }
+            System.out.println("----------");
+        System.out.println("**************");
+
+//        Bson criteria = Filters.in("vip", Arrays.asList(true));
+//
+//        FindIterable <Document> documents = books
+//                .find(criteria)
+//                .sort(Sorts.orderBy(
+//                        Sorts.ascending("author"))
+//                );
+
+//        for (Document document : documents) {
+//            System.out.println(document);
+//        }
+
+        System.out.println("----------------------------------");
+        System.out.println("----------------------------------");
+
+        for (Document existingBook : books.find()) {
+            System.out.println(existingBook);
+        }
+
         mongoClientConnectivity.close();
     }
 
@@ -112,7 +159,10 @@ public class ShopApp {
 
 
 
-    private static Document aMemebershipCard(String name, String lastName, List<String> books, String number) {
+
+
+
+    private static Document aMemebershipCard(String name, String lastName, List <String> books, String number) {
         return new Document()
                 .append("person", new Document()
                         .append("firstName", name)
